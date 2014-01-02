@@ -1,0 +1,11 @@
+﻿<Window x:Class="RemotControler.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ext="clr-namespace:RemotControler.UcControl"
+        Title="MainWindow" Height="560" Width="650">
+    <DockPanel Height="500" Margin="10" Name="dockPanel1" VerticalAlignment="Top" Panel.ZIndex="0" >
+        <Grid DockPanel.Dock="Top">
+            <StackPanel VerticalAlignment="Top" Height="100" Orientation="Horizontal">
+                
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
