@@ -1,11 +1,24 @@
 ﻿<Window x:Class="RemotControler.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ext="clr-namespace:RemotControler.UcControl"
         Title="MainWindow" Height="560" Width="650">
     <DockPanel Height="500" Margin="10" Name="dockPanel1" VerticalAlignment="Top" Panel.ZIndex="0" >
+        <DockPanel.Background>
+            <ImageBrush/>
+        </DockPanel.Background>
         <Grid DockPanel.Dock="Top">
-            <StackPanel VerticalAlignment="Top" Height="100" Orientation="Horizontal">
-                
+            <StackPanel VerticalAlignment="Top" Height="100" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+                <Grid>
+                    <Button Background="Transparent" Height="70" Margin="3" Click="Button_Click_1">
+                        <StackPanel Width="70" Height="65">
+                            <Image Source="/RemotControler;component/Contents/Image/loading.gif" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" ></Image>
+                            <TextBlock Text="远程连接" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </StackPanel>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Frame Name="mainFrame" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" Source="/RemotControler;component/RemoteDeskTop.xaml">
+            </Frame>
         </Grid>
     </DockPanel>
 </Window>

@@ -15,17 +15,13 @@ using System.Windows.Shapes;
 namespace RemotControler
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// RemoteDeskTop.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RemoteDeskTop : Page
     {
-        public MainWindow()
+        public RemoteDeskTop()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

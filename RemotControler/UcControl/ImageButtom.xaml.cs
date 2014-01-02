@@ -23,5 +23,22 @@ namespace RemotControler.UcControl
         {
             InitializeComponent();
         }
+
+        ////为自定义控件注册一个属性,ImageSource来作为填充在按钮中的图片
+        public static readonly DependencyProperty ImageSourceProperty;
+        //    DependencyProperty.Register("ImageSource", typeof(BitmapSource), typeof(ImageButtom),
+        //    new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSourceImageChange)));
+        public static BitmapSource ImageSource
+        {
+            get
+            {
+                return (BitmapSource)GetValue(ImageSourceProperty);
+            }
+            set
+            {
+                SetValue(ImageSourceProperty, value);
+            }
+        }
+
     }
 }
