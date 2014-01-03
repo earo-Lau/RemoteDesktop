@@ -5,7 +5,7 @@
             <ImageBrush/>
         </DockPanel.Background>
         <Grid DockPanel.Dock="Top">
-            <StackPanel VerticalAlignment="Top" Height="100" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+            <StackPanel VerticalAlignment="Top" Height="80" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
                 <Grid>
                     <Button Background="Transparent" Height="70" Margin="3" Click="Button_Click_1">
                         <StackPanel Width="70" Height="65">
