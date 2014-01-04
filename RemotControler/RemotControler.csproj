@@ -68,6 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComputerManage\AddSvr.xaml.cs">
+      <DependentUpon>AddSvr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ISvrDAL.cs" />
+    <Compile Include="DAL\SvrDAL.cs" />
+    <Compile Include="Model\Menu_Data.cs" />
     <Compile Include="Model\Server_Data.cs" />
     <Compile Include="RemoteWindow.xaml.cs">
       <DependentUpon>RemoteWindow.xaml</DependentUpon>
@@ -77,6 +83,10 @@
     <Compile Include="RemoteDeskTop.xaml.cs">
       <DependentUpon>RemoteDeskTop.xaml</DependentUpon>
     </Compile>
+    <Page Include="ComputerManage\AddSvr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,7 +137,13 @@
     <Resource Include="Contents\Image\loading.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="GroupManage\" />
     <Folder Include="UcControl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Contents\SvrList.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -23,7 +23,7 @@ namespace RemotControler
     /// </summary>
     public partial class RemoteWindow : Window
     {
-        AxMsTscAxNotSafeForScripting rdp;
+        protected AxMSTSCLib.AxMsRdpClient2 rdp;
         public RemoteWindow()
         {
             InitializeComponent();
@@ -37,30 +37,22 @@ namespace RemotControler
 
         public void Init(Server_Data model)
         {
-            rdp = new AxMsTscAxNotSafeForScripting();
+            rdp = new AxMSTSCLib.AxMsRdpClient2();
+            this.WindowState = WindowState.Maximized;
+            rdp.Dock = DockStyle.Fill;
             winFormsContainer.Child = rdp;
-            //this.WindowState = WindowState.Maximized;
-            rdp.Width = model.Width > 0 ? model.Width : 800;
-            rdp.Height = model.Height > 0 ? model.Height : 600;
-            
             ((System.ComponentModel.ISupportInitialize)(rdp)).BeginInit(); 
             ((System.ComponentModel.ISupportInitialize)(rdp)).EndInit();
 
-            rdp.Server = "192.168.9.20";
-            rdp.UserName = "113064";
-            IMsTscNonScriptable secured = (IMsTscNonScriptable)rdp.GetOcx();
-            secured.ClearTextPassword = model.Pwd;
+            rdp.DesktopHeight = Screen.PrimaryScreen.Bounds.Height;
+            rdp.DesktopWidth = Screen.PrimaryScreen.Bounds.Width;
+            rdp.Server = "103.27.126.234";
+            rdp.AdvancedSettings2.RDPPort = 3427;
+            rdp.UserName = "Administrator";
+            rdp.AdvancedSettings2.ClearTextPassword = "D17A9B67A059B171";
+            rdp.ColorDepth = 16;
+            rdp.FullScreen = false;
             rdp.Connect();
-        }
-
-        private void content_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            rdp.Width = (int)this.ActualWidth;
-            rdp.Height = (int)this.ActualHeight;
-            rdp.Refresh();
-
-            ((System.ComponentModel.ISupportInitialize)(rdp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(rdp)).EndInit();
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <Group Value="1">
+    <Server SN="111" Port="" UserName="" Pwd="" Width="0" Height="0" Color="0">
+    </Server>
+
+    <Server SN="333" Port="" UserName="" Pwd="" Width="0" Height="0" Color="0">
+    </Server>
+  </Group>
+  <Group Value="3">
+    <Server SN="erq" Port="" UserName="" Pwd="" Width="0" Height="0" Color="0">
+    </Server>
+
+    <Server SN="453" Port="" UserName="" Pwd="" Width="0" Height="0" Color="0">
+    </Server>
+  </Group>
+</root>

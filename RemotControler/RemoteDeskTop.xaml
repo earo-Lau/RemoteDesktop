@@ -14,14 +14,19 @@
                         <MenuItem Header="删除组"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="计算机管理">
-                        <MenuItem Header="新增"></MenuItem>
+                        <MenuItem Header="新增" Click="MenuItem_Click_1"></MenuItem>
                         <MenuItem Header="修改"></MenuItem>
                         <MenuItem Header="删除"></MenuItem>
                     </MenuItem>
                 </Menu>
         </StackPanel>
     <Grid DockPanel.Dock="Top">
-        <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" IsReadOnly="True" SelectionMode="Extended" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="285*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" 
+                  IsReadOnly="True" SelectionMode="Extended" AllowDrop="True" Grid.ColumnSpan="2">
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

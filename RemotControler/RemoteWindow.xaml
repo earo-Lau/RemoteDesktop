@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RemotControler.RemoteWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         Title="RemoteWindow" Height="600" Width="800">
-    <Grid Name="content" SizeChanged="content_SizeChanged">
+    <Grid Name="content">
         <wfi:WindowsFormsHost Name="winFormsContainer">
         </wfi:WindowsFormsHost>
     </Grid>
