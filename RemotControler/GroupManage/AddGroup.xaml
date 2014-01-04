@@ -1,0 +1,16 @@
+﻿<Window x:Class="RemotControler.GroupManage.AddGroup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddGroup" Height="120" Width="200">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TextBlock Text="名称" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="21,10,0,0"></TextBlock>
+        <TextBox Name="txtGroup" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,31,0,0" Width="150" ></TextBox>
+        <Button Content="确定" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="75" Margin="0,0,0,5"
+                Name="btnConfirm" Click="btnConfirm_Click"></Button>
+    </Grid>
+</Window>

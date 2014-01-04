@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RemotControler.DAL;
 
 namespace RemotControler.Model
 {
@@ -27,6 +28,24 @@ namespace RemotControler.Model
             _color_List.Add(new Item_Data() { Text = "真色彩(24 bit)", Value = "24" });
             _color_List.Add(new Item_Data() { Text = "最高质量(32 bit)", Value = "32" });
         }
+        #endregion
+
+        #region GroupList
+        public static IList<Item_Data> Group_LIst
+        {
+            get
+            {
+                return GetGroupList(); 
+            }
+        }
+
+        private static IList<Item_Data> GetGroupList()
+        {
+            ISvrDAL svr = SvrDAL.Instance;
+            var list = svr.GetGroupList().Select(g => new Item_Data() { Text = g, Value = g }).ToList();
+            return list;
+        }
+
         #endregion
 
         public class Item_Data

@@ -12,27 +12,43 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RemotControler.Extend;
 using RemotControler.Model;
+using RemotControler.ViewModel;
 
 namespace RemotControler.ComputerManage
 {
     /// <summary>
-    /// AddSvr.xaml 的交互逻辑
+    /// EditSvr.xaml 的交互逻辑
     /// </summary>
-    public partial class AddSvr : Window
+    public partial class EditSvr : Window
     {
-        
-        public AddSvr()
+        Computer_ViewModel vm;
+        public EditSvr(Server_Data model)
         {
             InitializeComponent();
+            vm = new Computer_ViewModel(model);
+
+            InitDetail();
+        }
+
+        private void InitDetail()
+        {
             cbxColor.ItemsSource = Menu_Data.Color_List;
+            txtSN.Text = vm.model.SN;
+            txtPort.Text = vm.model.Port;
+            txtUser.Text = vm.model.UserName;
+            txtPwd.Password = PasswordHelper.DecodePwd(vm.model.Pwd);
+            txtWidth.Text = vm.model.Width.ToString();
+            txtHeight.Text = vm.model.Height.ToString();
+            txtRemark.Text = vm.model.Remark;
+
             cbxColor.DisplayMemberPath = "Text";
             cbxColor.SelectedValuePath = "Value";
-            cbxColor.SelectedValue = "32";
+            cbxColor.SelectedValue = vm.model.Color.ToString();
 
             cbxGroup.ItemsSource = Menu_Data.Group_LIst;
             cbxGroup.DisplayMemberPath = "Text";
             cbxGroup.SelectedValuePath = "Value";
-            cbxGroup.SelectedIndex = 0;
+            cbxGroup.SelectedValue = vm.model.Group;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -54,15 +70,9 @@ namespace RemotControler.ComputerManage
             model.Remark = txtRemark.Text;
 
             DAL.ISvrDAL svrDAL = DAL.SvrDAL.Instance;
-            svrDAL.AddSvr(model);
-
+            svrDAL.EditSvr(model, vm.model);
             MessageBox.Show("修改成功");
             this.Close();
-        }
-
-        private bool Validations()
-        {
-            return true;
         }
     }
 }

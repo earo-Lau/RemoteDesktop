@@ -7,7 +7,7 @@ using RemotControler.ViewModel;
 namespace RemotControler.Model
 {
     [Serializable]
-    public class Server_Data : ViewModelBase
+    public class Server_Data : ViewModelBase, ICloneable
     {
         #region LoginInfo
         private string _sn;
@@ -98,5 +98,10 @@ namespace RemotControler.Model
         }
 
         #endregion
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

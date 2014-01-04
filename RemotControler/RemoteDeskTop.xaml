@@ -9,24 +9,20 @@
         <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Height="25">
                 <Menu Height="30" Name="menu1" Width="auto" >
                     <MenuItem Header="群组管理">
-                        <MenuItem Header="新建组"></MenuItem>
-                        <MenuItem Header="重命名组"></MenuItem>
-                        <MenuItem Header="删除组"></MenuItem>
+                        <MenuItem Header="新建组" Name="AddGroup" Click="AddGroup_Click_1"></MenuItem>
+                        <MenuItem Header="重命名组" Name="RenameGroup" Click="RenameGroup_Click_1"></MenuItem>
+                        <MenuItem Header="删除组" Name="DeleteGroup" Click="DeleteGroup_Click_1"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="计算机管理">
-                        <MenuItem Header="新增" Click="MenuItem_Click_1"></MenuItem>
-                        <MenuItem Header="修改"></MenuItem>
-                        <MenuItem Header="删除"></MenuItem>
+                        <MenuItem Header="新增" Name="AddSvr" Click="AddSvr_Click_1"></MenuItem>
+                        <MenuItem Header="修改" Name="EditSvr" Click="EditSvr_Click_1"></MenuItem>
+                        <MenuItem Header="删除" Name="DeleteSvr" Click="DeleteSvr_Click_1"></MenuItem>
                     </MenuItem>
                 </Menu>
         </StackPanel>
     <Grid DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="22*"/>
-                <ColumnDefinition Width="285*"/>
-            </Grid.ColumnDefinitions>
             <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" 
-                  IsReadOnly="True" SelectionMode="Extended" AllowDrop="True" Grid.ColumnSpan="2">
+                  IsReadOnly="True" SelectionMode="Single" AllowDrop="True">
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
@@ -50,6 +46,13 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </DataGrid.GroupStyle>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="添加计算机" Click="AddSvr_Click_1"></MenuItem>
+                        <MenuItem Header="删除计算机" Click="DeleteThis_Click_1"></MenuItem>
+                        <MenuItem Header="移动到分组" Name="moveGroup"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTemplateColumn CanUserReorder="False">
                         <DataGridTemplateColumn.HeaderTemplate>
@@ -84,6 +87,5 @@
                 </DataGrid.Columns>
         </DataGrid>
     </Grid>
-        
     </DockPanel>
 </Page>

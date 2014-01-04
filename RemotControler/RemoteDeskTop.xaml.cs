@@ -30,7 +30,7 @@ namespace RemotControler
     /// </summary>
     public partial class RemoteDeskTop : Page
     {
-        ObservableCollection<Server_Data> data = new ObservableCollection<Server_Data>();
+        Server_DataView vm;
 
         public RemoteDeskTop()
         {
@@ -40,19 +40,40 @@ namespace RemotControler
 
         private void InitData()
         {
-            Server_DataView vm = new Server_DataView();
-            ISvrDAL svrHandler = SvrDAL.Instance;
-            svrHandler.ReadSvr().ForEach(s => vm.model.Add(s));
-            
+            vm = new Server_DataView();
+            LoadModel();
+
             ICollectionView vw = CollectionViewSource.GetDefaultView(vm.model);
             vw.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
 
             dataGrid.DataContext = vm;
 
-            //this.dataGrid.PreviewMouseLeftButtonDown +=
-            //    new MouseButtonEventHandler(dataGrid_PreviewMouseLeftButtonDown);
-            ////The Drop Event
-            //this.dataGrid.Drop += new DragEventHandler(dataGrid_Drop);
+            this.dataGrid.PreviewMouseLeftButtonDown +=new MouseButtonEventHandler(dataGrid_PreviewMouseLeftButtonDown);
+            //The Drop Event
+            this.dataGrid.Drop += new DragEventHandler(dataGrid_Drop);
+
+            LoadGroup();
+        }
+
+        private void LoadModel()
+        {
+            vm.model.Clear();
+            ISvrDAL svrDAL = SvrDAL.Instance;
+            svrDAL.ReadSvr().ForEach(s => vm.model.Add(s));
+        }
+
+        private void LoadGroup()
+        {
+            IList<MenuItem> gMenu = new List<MenuItem>();
+            foreach (var g in Menu_Data.Group_LIst)
+            {
+                MenuItem item = new MenuItem();
+                item.Header = g.Text;
+
+                item.Click += MoveGroup_Click_1;
+                gMenu.Add(item);
+            }
+            moveGroup.ItemsSource = gMenu;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -62,10 +83,15 @@ namespace RemotControler
             remote.Show();
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void MoveGroup(string group, Server_Data model)
         {
-            AddSvr window = new AddSvr();
-            window.Show();
+            var clone = model.Clone() as Server_Data;
+            clone.Group = group;
+
+            ISvrDAL svrDAL = SvrDAL.Instance;
+            svrDAL.EditSvr(clone, model);
+
+            LoadModel();
         }
 
         #region Drag&Drop
@@ -101,9 +127,8 @@ namespace RemotControler
 
             Server_Data movedSvr = vm.model[prevRowIndex];
             string group = vm.model[index].Group;
-            vm.model.RemoveAt(prevRowIndex);
-            movedSvr.Group = group;
-            vm.model.Insert(index, movedSvr);
+
+            MoveGroup(group, movedSvr);
         }
 
         void dataGrid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -124,11 +149,11 @@ namespace RemotControler
 
             DragDropEffects dragdropeffects = DragDropEffects.Move;
 
-            if (DragDrop.DoDragDrop(dataGrid, selectedSvr, dragdropeffects)
-                                != DragDropEffects.None)
+            if (DragDrop.DoDragDrop(dataGrid, selectedSvr, dragdropeffects) != DragDropEffects.None)
             {
                 //Now This Item will be dropped at new location and so the new Selected Item
                 dataGrid.SelectedItem = selectedSvr;
+                selectedSvr.IsSelect = selectedSvr.IsSelect ? false : true;
             }
         }
 
@@ -147,8 +172,6 @@ namespace RemotControler
             return posBounds.Contains(theMousePos);
         }
 
-
-
         /// <summary>
         /// Returns the selected DataGridRow
         /// </summary>
@@ -156,8 +179,7 @@ namespace RemotControler
         /// <returns></returns>
         private DataGridRow GetDataGridRowItem(int index)
         {
-            if (dataGrid.ItemContainerGenerator.Status
-                    != GeneratorStatus.ContainersGenerated)
+            if (dataGrid.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
 
             return dataGrid.ItemContainerGenerator.ContainerFromIndex(index)
@@ -185,5 +207,95 @@ namespace RemotControler
         }
         #endregion
 
+        #region Computer_Mange
+        private void AddSvr_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddSvr window = new AddSvr();
+            window.ShowDialog();
+            LoadModel();
+        }
+
+        private void EditSvr_Click_1(object sender, RoutedEventArgs e)
+        {
+            var vm = dataGrid.DataContext as Server_DataView;
+            var svrList = vm.model.Where(svr => svr.IsSelect).ToList();
+            foreach (var svr in svrList)
+            {
+                EditSvr window = new EditSvr(svr);
+                window.ShowDialog();
+            }
+            LoadModel();
+        }
+
+        private void DeleteSvr_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("确定删除选择的计算机？", "确定删除", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                var vm = dataGrid.DataContext as Server_DataView;
+                var svrList = vm.model.Where(svr => svr.IsSelect).ToList();
+                foreach (var svr in svrList)
+                {
+                    ISvrDAL svrDAL = SvrDAL.Instance;
+                    svrDAL.DeleteSvr(svr);
+                }
+
+                LoadModel();
+            }
+        }
+        #endregion
+
+        #region Group_Manage
+        private void AddGroup_Click_1(object sender, RoutedEventArgs e)
+        {
+            GroupManage.AddGroup window = new GroupManage.AddGroup();
+            window.ShowDialog();
+            LoadModel();
+            LoadGroup();
+        }
+
+        private void RenameGroup_Click_1(object sender, RoutedEventArgs e)
+        {
+            GroupManage.RenameGroup window = new GroupManage.RenameGroup();
+            window.ShowDialog();
+            LoadModel();
+            LoadGroup();
+        }
+
+        private void DeleteGroup_Click_1(object sender, RoutedEventArgs e)
+        {
+            GroupManage.DeleteGroup window = new GroupManage.DeleteGroup();
+            window.ShowDialog();
+            LoadModel();
+            LoadGroup();
+        }
+        #endregion
+
+        #region ContextMenu
+        private void DeleteThis_Click_1(object sender, RoutedEventArgs e)
+        {
+            Server_Data svr = this.dataGrid.SelectedItem as Server_Data;
+            if (svr == null)
+                return;
+
+            if (MessageBox.Show("确定删除选择的计算机？", "确定删除", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                ISvrDAL svrDAL = SvrDAL.Instance;
+                svrDAL.DeleteSvr(svr);
+
+                LoadModel();
+            }
+        }
+
+        private void MoveGroup_Click_1(object sender, RoutedEventArgs e)
+        {
+            var group = ((MenuItem)sender).Header.ToString();
+            Server_Data svr = dataGrid.SelectedItem as Server_Data;
+            if (svr != null)
+            {
+                MoveGroup(group, svr);
+            }
+        }
+
+        #endregion
     }
 }
