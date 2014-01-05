@@ -48,9 +48,9 @@ namespace RemotControler
 
             dataGrid.DataContext = vm;
 
-            this.dataGrid.PreviewMouseLeftButtonDown +=new MouseButtonEventHandler(dataGrid_PreviewMouseLeftButtonDown);
-            //The Drop Event
-            this.dataGrid.Drop += new DragEventHandler(dataGrid_Drop);
+            //this.dataGrid.PreviewMouseLeftButtonDown +=new MouseButtonEventHandler(dataGrid_PreviewMouseLeftButtonDown);
+            ////The Drop Event
+            //this.dataGrid.Drop += new DragEventHandler(dataGrid_Drop);
 
             LoadGroup();
         }
@@ -97,6 +97,7 @@ namespace RemotControler
         #region Drag&Drop
 
         int prevRowIndex = -1;
+        bool isClick = false, isDrag = false;
         /// <summary>
         /// Defines the Drop Position based upon the index.
         /// </summary>
@@ -139,21 +140,40 @@ namespace RemotControler
                 return;
             dataGrid.SelectedIndex = prevRowIndex;
 
-            Server_Data selectedSvr = dataGrid.Items[prevRowIndex] as Server_Data;
+            isClick = true;
+        }
 
-            if (selectedSvr == null)
-                return;
-
-            //Now Create a Drag Rectangle with Mouse Drag-Effect
-            //Here you can select the Effect as per your choice
-
-            DragDropEffects dragdropeffects = DragDropEffects.Move;
-
-            if (DragDrop.DoDragDrop(dataGrid, selectedSvr, dragdropeffects) != DragDropEffects.None)
+        private void dataGrid_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            if (isClick)
             {
-                //Now This Item will be dropped at new location and so the new Selected Item
-                dataGrid.SelectedItem = selectedSvr;
-                selectedSvr.IsSelect = selectedSvr.IsSelect ? false : true;
+                isDrag = true;
+
+                Server_Data selectedSvr = dataGrid.Items[prevRowIndex] as Server_Data;
+
+                if (selectedSvr == null)
+                    return;
+
+                //Now Create a Drag Rectangle with Mouse Drag-Effect
+                //Here you can select the Effect as per your choice
+                DragDropEffects dragdropeffects = DragDropEffects.Move;
+
+                if (DragDrop.DoDragDrop(dataGrid, selectedSvr, dragdropeffects) != DragDropEffects.None)
+                {
+                    //Now This Item will be dropped at new location and so the new Selected Item
+                    dataGrid.SelectedItem = selectedSvr;
+                    //selectedSvr.IsSelect = selectedSvr.IsSelect ? false : true;
+                    isClick = false;
+                    isDrag = false;
+                }
+            }
+        }
+
+        private void dataGrid_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+            if (isClick)
+            {
+                isClick = false;
             }
         }
 
@@ -297,5 +317,7 @@ namespace RemotControler
         }
 
         #endregion
+
+
     }
 }

@@ -22,7 +22,7 @@
         </StackPanel>
     <Grid DockPanel.Dock="Top">
             <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" 
-                  IsReadOnly="True" SelectionMode="Single" AllowDrop="True">
+                  IsReadOnly="True" SelectionMode="Single" AllowDrop="True" PreviewMouseLeftButtonDown="dataGrid_PreviewMouseLeftButtonDown" MouseMove="dataGrid_MouseMove_1" MouseLeftButtonUp="dataGrid_MouseLeftButtonUp_1" Drop="dataGrid_Drop">
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

@@ -16,9 +16,9 @@ namespace RemotControler.Model
         private string _pwd;
         private string _status;
         private string _remark;
-        private int _width;
-        private int _height;
-        private int _color;
+        private string _width;
+        private string _height;
+        private string _color;
 
         public string SN
         {
@@ -56,19 +56,19 @@ namespace RemotControler.Model
             set { _remark = value; }
         }
 
-        public int Width
+        public string Width
         {
             get { return _width; }
             set { _width = value; }
         }
 
-        public int Height
+        public string Height
         {
             get { return _height; }
             set { _height = value; }
         }
 
-        public int Color
+        public string Color
         {
             get { return _color; }
             set { _color = value; }

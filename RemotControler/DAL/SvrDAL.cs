@@ -34,9 +34,9 @@ namespace RemotControler.DAL
                             Port = x.Attribute("Port").Value,
                             UserName = x.Attribute("UserName").Value,
                             Pwd = x.Attribute("Pwd").Value,
-                            Width = int.Parse(x.Attribute("Width").Value),
-                            Height = int.Parse(x.Attribute("Height").Value),
-                            Color = int.Parse(x.Attribute("Color").Value),
+                            Width = x.Attribute("Width").Value,
+                            Height = x.Attribute("Height").Value,
+                            Color = x.Attribute("Color").Value,
                             Remark = x.Value
                         });
                     }
@@ -74,9 +74,9 @@ namespace RemotControler.DAL
                 && s.Attribute("UserName").Value == oModel.UserName
                 && s.Attribute("Port").Value == oModel.Port
                 && s.Attribute("Pwd").Value == oModel.Pwd
-                && s.Attribute("Width").Value == oModel.Width.ToString()
-                && s.Attribute("Height").Value == oModel.Height.ToString()
-                && s.Attribute("Color").Value == oModel.Color.ToString()
+                && s.Attribute("Width").Value == oModel.Width
+                && s.Attribute("Height").Value == oModel.Height
+                && s.Attribute("Color").Value == oModel.Color
                 && s.Value == oModel.Remark);
 
             svr.SetAttributeValue("SN", model.SN);
@@ -106,9 +106,9 @@ namespace RemotControler.DAL
                 && s.Attribute("UserName").Value == model.UserName
                 && s.Attribute("Port").Value == model.Port
                 && s.Attribute("Pwd").Value == model.Pwd
-                && s.Attribute("Width").Value == model.Width.ToString()
-                && s.Attribute("Height").Value == model.Height.ToString()
-                && s.Attribute("Color").Value == model.Color.ToString()
+                && s.Attribute("Width").Value == model.Width
+                && s.Attribute("Height").Value == model.Height
+                && s.Attribute("Color").Value == model.Color
                 && s.Value == model.Remark);
 
             if (svr != null)

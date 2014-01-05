@@ -15,6 +15,7 @@ using MSTSCLib;
 using RemotControler.Model;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using RemotControler.Extend;
 
 namespace RemotControler
 {
@@ -37,22 +38,40 @@ namespace RemotControler
 
         public void Init(Server_Data model)
         {
-            rdp = new AxMSTSCLib.AxMsRdpClient2();
-            this.WindowState = WindowState.Maximized;
-            rdp.Dock = DockStyle.Fill;
-            winFormsContainer.Child = rdp;
-            ((System.ComponentModel.ISupportInitialize)(rdp)).BeginInit(); 
-            ((System.ComponentModel.ISupportInitialize)(rdp)).EndInit();
+            try
+            {
+                rdp = new AxMSTSCLib.AxMsRdpClient2();
+                this.WindowState = WindowState.Maximized;
+                rdp.Dock = DockStyle.Fill;
+                winFormsContainer.Child = rdp;
+                ((System.ComponentModel.ISupportInitialize)(rdp)).BeginInit();
+                ((System.ComponentModel.ISupportInitialize)(rdp)).EndInit();
 
-            rdp.DesktopHeight = Screen.PrimaryScreen.Bounds.Height;
-            rdp.DesktopWidth = Screen.PrimaryScreen.Bounds.Width;
-            rdp.Server = "103.27.126.234";
-            rdp.AdvancedSettings2.RDPPort = 3427;
-            rdp.UserName = "Administrator";
-            rdp.AdvancedSettings2.ClearTextPassword = "D17A9B67A059B171";
-            rdp.ColorDepth = 16;
-            rdp.FullScreen = false;
-            rdp.Connect();
+                int width = 0;
+                int height = 0;
+                int.TryParse(model.Width, out width);
+                int.TryParse(model.Height, out height);
+
+                rdp.DesktopWidth = width > 0 ? width : Screen.PrimaryScreen.Bounds.Width;
+                rdp.DesktopHeight = height >0 ? height: Screen.PrimaryScreen.Bounds.Height;
+
+                rdp.Server = model.SN;
+                if (!string.IsNullOrEmpty(model.Port))
+                {
+                    rdp.AdvancedSettings2.RDPPort = int.Parse(model.Port);
+                }
+                rdp.UserName = model.UserName;
+                rdp.AdvancedSettings2.ClearTextPassword = PasswordHelper.DecodePwd(model.Pwd);
+                int color = 0;
+                int.TryParse(model.Color, out color);
+                rdp.ColorDepth = color;
+                rdp.FullScreen = false;
+                rdp.Connect();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("设置有误，请修改远程计算机的设置。", "Error");
+            }
         }
     }
 }

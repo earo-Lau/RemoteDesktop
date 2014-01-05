@@ -48,9 +48,9 @@ namespace RemotControler.ComputerManage
             model.UserName = txtUser.Text;
             model.Pwd = PasswordHelper.EncodePwd(txtPwd.Password);
             model.Group = cbxGroup.SelectedValue.ToString();
-            model.Width = string.IsNullOrEmpty(txtWidth.Text) ? 0 : int.Parse(txtWidth.Text);
-            model.Height = string.IsNullOrEmpty(txtHeight.Text) ? 0 : int.Parse(txtHeight.Text);
-            model.Color = int.Parse(cbxColor.SelectedValue.ToString());
+            model.Width = string.IsNullOrEmpty(txtWidth.Text) ? "0" : txtWidth.Text;
+            model.Height = string.IsNullOrEmpty(txtHeight.Text) ? "0" : txtHeight.Text;
+            model.Color = cbxColor.SelectedValue.ToString();
             model.Remark = txtRemark.Text;
 
             DAL.ISvrDAL svrDAL = DAL.SvrDAL.Instance;

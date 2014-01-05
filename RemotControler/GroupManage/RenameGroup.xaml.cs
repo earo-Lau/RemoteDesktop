@@ -32,11 +32,21 @@ namespace RemotControler.GroupManage
 
         private void btnConfirm_Click_1(object sender, RoutedEventArgs e)
         {
-            ISvrDAL svrDAL = SvrDAL.Instance;
-            svrDAL.RenameGroup(txtName.Text, cbxGroup.SelectedValue.ToString());
 
-            MessageBox.Show("修改成功。", "Success");
-            this.Close();
+            ISvrDAL svrDAL = SvrDAL.Instance;
+            var gList = svrDAL.GetGroupList();
+            if (!gList.Contains(txtName.Text))
+            {
+                svrDAL.RenameGroup(txtName.Text, cbxGroup.SelectedValue.ToString());
+
+                MessageBox.Show("修改成功。", "Success");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("抱歉，名称已存在！\n请修改名称后再添加。", "Wand");
+            }
+
         }
     }
 }
