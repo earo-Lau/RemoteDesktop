@@ -135,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Contents\MyButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Contents\ValidationTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,9 +203,6 @@
     <None Include="RemotControler_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Contents\Image\loading.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
@@ -224,10 +225,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Contents\Image\Close.png" />
+    <Resource Include="Contents\Image\Max.png" />
+    <Resource Include="Contents\Image\Menu.png" />
+    <Resource Include="Contents\Image\Min.png" />
+    <Resource Include="Contents\Image\Theme.png" />
     <Content Include="Contents\SvrList.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Contents\Image\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
