@@ -121,6 +121,9 @@
     <Compile Include="RemoteWindow.xaml.cs">
       <DependentUpon>RemoteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RightSideBar.xaml.cs">
+      <DependentUpon>RightSideBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Computer_ViewModel.cs" />
     <Compile Include="ViewModel\Server_DataView.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RemoteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RightSideBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -135,6 +135,7 @@
     					</ControlTemplate>
     				</Setter.Value>
     			</Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
     		</Style>
     	</ResourceDictionary>
     </Application.Resources>
