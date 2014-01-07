@@ -20,8 +20,8 @@
                     </MenuItem>
                 </Menu>
         </StackPanel>
-    <Grid DockPanel.Dock="Top">
-            <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" 
+    <Grid DockPanel.Dock="Top" Background="Transparent">
+            <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" Background="Transparent" BorderBrush="Snow" BorderThickness="3"
                   IsReadOnly="True" SelectionMode="Single" AllowDrop="True" PreviewMouseLeftButtonDown="dataGrid_PreviewMouseLeftButtonDown" MouseMove="dataGrid_MouseMove_1" MouseLeftButtonUp="dataGrid_MouseLeftButtonUp_1" Drop="dataGrid_Drop">
             <DataGrid.GroupStyle>
                 <GroupStyle>
@@ -48,7 +48,9 @@
             </DataGrid.GroupStyle>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="连接计算机" Name="btnConenction" Click="Button_Click"></MenuItem>
                         <MenuItem Header="添加计算机" Click="AddSvr_Click_1"></MenuItem>
+                        <MenuItem Header="复制计算机" Click="CopySvr_Click_1"></MenuItem>
                         <MenuItem Header="删除计算机" Click="DeleteThis_Click_1"></MenuItem>
                         <MenuItem Header="移动到分组" Name="moveGroup"></MenuItem>
                     </ContextMenu>
@@ -72,18 +74,6 @@
                     <DataGridTextColumn Header="UserName" Width="80" Binding="{Binding UserName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Width="80" Binding="{Binding Status}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Remark" Width="80" Binding="{Binding Remark}"></DataGridTextColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="Operat"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="连接" Click="Button_Click"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
         </DataGrid>
     </Grid>

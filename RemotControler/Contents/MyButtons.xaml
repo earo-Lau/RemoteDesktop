@@ -33,12 +33,6 @@
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="grid">
                                 <EasingDoubleKeyFrame KeyTime="0" Value="0.578"/>
                             </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image">
-                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image">
-                                <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
-                            </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <Grid x:Name="grid">
@@ -56,16 +50,7 @@
                                     <GradientStop Color="#FF959595" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.BorderBrush>
-                            <Image x:Name="image" Source="Image/Close.png" Height="9" Width="9" RenderTransformOrigin="0.5,0.5">
-                                <Image.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Image.RenderTransform>
-                            </Image>
+                            
                         </Border>
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
@@ -146,7 +131,7 @@
                                     <GradientStop Color="#FF959595" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.BorderBrush>
-                            <Image x:Name="image" Source="/Image/Max.png" Height="9" Width="9" RenderTransformOrigin="0.5,0.5">
+                            <Image x:Name="image" Source="Image/Max.png" Height="9" Width="9" RenderTransformOrigin="0.5,0.5">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>

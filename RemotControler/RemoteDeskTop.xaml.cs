@@ -79,6 +79,9 @@ namespace RemotControler
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var s = dataGrid.SelectedItem as Server_Data;
+            if (s == null)
+                return;
+
             RemoteWindow remote = new RemoteWindow(s);
             remote.Show();
         }
@@ -232,6 +235,17 @@ namespace RemotControler
         {
             AddSvr window = new AddSvr();
             window.ShowDialog();
+            LoadModel();
+        }
+
+        private void CopySvr_Click_1(object sender, RoutedEventArgs e)
+        {
+            var s = dataGrid.SelectedItem as Server_Data;
+            if (s == null)
+                return;
+
+            DAL.ISvrDAL svrDAL = DAL.SvrDAL.Instance;
+            svrDAL.AddSvr(s);
             LoadModel();
         }
 
