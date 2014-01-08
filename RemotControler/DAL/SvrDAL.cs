@@ -37,6 +37,7 @@ namespace RemotControler.DAL
                             Width = x.Attribute("Width").Value,
                             Height = x.Attribute("Height").Value,
                             Color = x.Attribute("Color").Value,
+                            FullScreen=int.Parse(x.Attribute("FS").Value),
                             Remark = x.Value
                         });
                     }
@@ -61,6 +62,7 @@ namespace RemotControler.DAL
             svr.SetAttributeValue("Width", model.Width);
             svr.SetAttributeValue("Height", model.Height);
             svr.SetAttributeValue("Color", model.Color);
+            svr.SetAttributeValue("FS", model.FullScreen);
             svr.Value = model.Remark;
 
             gTarget.Add(svr);
@@ -70,13 +72,14 @@ namespace RemotControler.DAL
         public void EditSvr(Server_Data model, Server_Data oModel)
         {
             var oGroup = doc.Elements("root").Elements("Group").SingleOrDefault(g => g.Attribute("Value").Value == oModel.Group);
-            var svr = oGroup.Elements("Server").SingleOrDefault(s => s.Attribute("SN").Value == oModel.SN
+            var svr = oGroup.Elements("Server").FirstOrDefault(s => s.Attribute("SN").Value == oModel.SN
                 && s.Attribute("UserName").Value == oModel.UserName
                 && s.Attribute("Port").Value == oModel.Port
                 && s.Attribute("Pwd").Value == oModel.Pwd
                 && s.Attribute("Width").Value == oModel.Width
                 && s.Attribute("Height").Value == oModel.Height
                 && s.Attribute("Color").Value == oModel.Color
+                && s.Attribute("FS").Value == oModel.FullScreen.ToString()
                 && s.Value == oModel.Remark);
 
             svr.SetAttributeValue("SN", model.SN);
@@ -86,6 +89,7 @@ namespace RemotControler.DAL
             svr.SetAttributeValue("Width", model.Width);
             svr.SetAttributeValue("Height", model.Height);
             svr.SetAttributeValue("Color", model.Color);
+            svr.SetAttributeValue("FS", model.FullScreen);
             svr.Value = model.Remark;
 
             if (model.Group != oModel.Group)
@@ -102,13 +106,14 @@ namespace RemotControler.DAL
         public void DeleteSvr(Server_Data model)
         {
             var gTarget = doc.Elements("root").Elements("Group").SingleOrDefault(g => g.Attribute("Value").Value == model.Group);
-            var svr = gTarget.Elements("Server").SingleOrDefault(s => s.Attribute("SN").Value == model.SN
+            var svr = gTarget.Elements("Server").FirstOrDefault(s => s.Attribute("SN").Value == model.SN
                 && s.Attribute("UserName").Value == model.UserName
                 && s.Attribute("Port").Value == model.Port
                 && s.Attribute("Pwd").Value == model.Pwd
                 && s.Attribute("Width").Value == model.Width
                 && s.Attribute("Height").Value == model.Height
                 && s.Attribute("Color").Value == model.Color
+                && s.Attribute("FS").Value == model.FullScreen.ToString()
                 && s.Value == model.Remark);
 
             if (svr != null)

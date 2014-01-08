@@ -19,6 +19,7 @@ namespace RemotControler.Model
         private string _width;
         private string _height;
         private string _color;
+        private int _fullScreen;
 
         public string SN
         {
@@ -72,6 +73,17 @@ namespace RemotControler.Model
         {
             get { return _color; }
             set { _color = value; }
+        }
+
+        public int FullScreen
+        {
+            get { return _fullScreen; }
+            set { _fullScreen = value; }
+        }
+
+        public bool FullScreen_View
+        {
+            get { return 0 != FullScreen; }
         }
 
         #endregion

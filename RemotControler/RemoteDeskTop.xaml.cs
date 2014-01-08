@@ -15,8 +15,6 @@ using System.Collections.ObjectModel;
 using RemotControler.Model;
 using System.ComponentModel;
 using RemotControler.ViewModel;
-using AxMSTSCLib;
-using MSTSCLib;
 using RemotControler.DAL;
 using System.Windows.Controls.Primitives;
 using RemotControler.ComputerManage;

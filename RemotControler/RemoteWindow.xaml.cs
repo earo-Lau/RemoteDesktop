@@ -24,7 +24,7 @@ namespace RemotControler
     /// </summary>
     public partial class RemoteWindow : Window
     {
-        protected AxMSTSCLib.AxMsRdpClient2 rdp;
+        protected AxMSTSCLib.AxMsRdpClient7NotSafeForScripting rdp;
         public RemoteWindow()
         {
             InitializeComponent();
@@ -40,10 +40,10 @@ namespace RemotControler
         {
             try
             {
-                rdp = new AxMSTSCLib.AxMsRdpClient2();
+                rdp = new AxMSTSCLib.AxMsRdpClient7NotSafeForScripting();
                 this.WindowState = WindowState.Maximized;
-                rdp.Dock = DockStyle.Fill;
                 winFormsContainer.Child = rdp;
+                rdp.Dock = DockStyle.Fill;
                 ((System.ComponentModel.ISupportInitialize)(rdp)).BeginInit();
                 ((System.ComponentModel.ISupportInitialize)(rdp)).EndInit();
 
@@ -51,10 +51,10 @@ namespace RemotControler
                 int height = 0;
                 int.TryParse(model.Width, out width);
                 int.TryParse(model.Height, out height);
-
+                
                 rdp.DesktopWidth = width > 0 ? width : Screen.PrimaryScreen.Bounds.Width;
-                rdp.DesktopHeight = height >0 ? height: Screen.PrimaryScreen.Bounds.Height;
-
+                rdp.DesktopHeight = height > 0 ? height : Screen.PrimaryScreen.Bounds.Height;
+                
                 rdp.Server = model.SN;
                 if (!string.IsNullOrEmpty(model.Port))
                 {
@@ -65,12 +65,14 @@ namespace RemotControler
                 int color = 0;
                 int.TryParse(model.Color, out color);
                 rdp.ColorDepth = color;
-                rdp.FullScreen = false;
+                rdp.FullScreen = model.FullScreen_View;
+
                 rdp.Connect();
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("设置有误，请修改远程计算机的设置。", "Error");
+                this.Close();
             }
         }
     }

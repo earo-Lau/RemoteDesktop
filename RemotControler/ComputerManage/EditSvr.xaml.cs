@@ -49,6 +49,8 @@ namespace RemotControler.ComputerManage
             cbxGroup.DisplayMemberPath = "Text";
             cbxGroup.SelectedValuePath = "Value";
             cbxGroup.SelectedValue = vm.model.Group;
+
+            checkFull.IsChecked = vm.model.FullScreen_View;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -68,6 +70,7 @@ namespace RemotControler.ComputerManage
             model.Height = string.IsNullOrEmpty(txtHeight.Text) ? "0" : txtHeight.Text;
             model.Color = cbxColor.SelectedValue.ToString();
             model.Remark = txtRemark.Text;
+            model.FullScreen = checkFull.IsChecked.GetValueOrDefault(false) ? 1 : 0;
 
             DAL.ISvrDAL svrDAL = DAL.SvrDAL.Instance;
             svrDAL.EditSvr(model, vm.model);

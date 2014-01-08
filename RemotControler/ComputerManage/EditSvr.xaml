@@ -57,7 +57,6 @@
                         <Label Background="#FFE5E5E5" Content="显示设置" HorizontalAlignment="Left" VerticalAlignment="Top"
                            VerticalContentAlignment="Top" Margin="16,-2,0,0" Height="26"/>
                         <Grid Height="155" VerticalAlignment="Top" Margin="0,5,0,0">
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="65*"></RowDefinition>
                                 <RowDefinition Height="45*"></RowDefinition>
@@ -70,6 +69,8 @@
                                    VerticalAlignment="Top"  TextWrapping="Wrap" Text="高" />
                             <TextBox Grid.Column="0" Grid.Row="0" Name="txtHeight" HorizontalAlignment="Left" VerticalAlignment="Top"
                                  Width="60" Margin="102,39,0,0" Height="22" ></TextBox>
+                            <CheckBox Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Name="checkFull" Margin="20,67,0,0"></CheckBox>
+                            <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,65,0,0" Text="全屏"></TextBlock>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Left" Height="18" Margin="20,0,0,0" 
                                    VerticalAlignment="Top"  TextWrapping="Wrap" Text="颜色" />
                             <ComboBox Grid.Row="1" Name="cbxColor" HorizontalAlignment="Left" VerticalAlignment="Top"
