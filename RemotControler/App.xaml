@@ -137,6 +137,13 @@
     			</Setter>
                 <Setter Property="Foreground" Value="White"></Setter>
     		</Style>
+            <Style x:Key="HypherButton" BasedOn="{StaticResource MainButtonStyle}" TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
     	</ResourceDictionary>
     </Application.Resources>
 </Application>

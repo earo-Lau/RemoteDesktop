@@ -43,7 +43,7 @@
         <TextBlock Text="3389客户端" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,4,0,0" Foreground="White"></TextBlock>
         <StackPanel Margin="0,20,0,0" Grid.Row="0" VerticalAlignment="Top" Height="80" Orientation="Horizontal" >
             <Grid>
-                <Button Style="{StaticResource MainButtonStyle}"  Height="Auto" Margin="3,0" Click="Button_Click_1" >
+                <Button Style="{StaticResource MainButtonStyle}" Height="Auto" Margin="3,0" Click="Button_Click_1" >
                     <StackPanel Width="70" Height="65">
                         <Image Source="/RemotControler;component/Contents/Image/loading.gif" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" ></Image>
                         <TextBlock Text="远程连接" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>

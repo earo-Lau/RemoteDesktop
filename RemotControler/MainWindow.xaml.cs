@@ -19,9 +19,12 @@ namespace RemotControler
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static bool isRun = true;
+
         public MainWindow()
         {
             InitializeComponent();
+            isRun = true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -35,6 +38,7 @@ namespace RemotControler
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            isRun = false;
             this.Close();
         }
 

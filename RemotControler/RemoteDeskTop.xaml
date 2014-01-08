@@ -7,46 +7,56 @@
     </Page.DataContext>
     <DockPanel>
         <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Height="25">
-                <Menu Height="30" Name="menu1" Width="auto" >
-                    <MenuItem Header="群组管理">
-                        <MenuItem Header="新建组" Name="AddGroup" Click="AddGroup_Click_1"></MenuItem>
-                        <MenuItem Header="重命名组" Name="RenameGroup" Click="RenameGroup_Click_1"></MenuItem>
-                        <MenuItem Header="删除组" Name="DeleteGroup" Click="DeleteGroup_Click_1"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="计算机管理">
-                        <MenuItem Header="新增" Name="AddSvr" Click="AddSvr_Click_1"></MenuItem>
-                        <MenuItem Header="修改" Name="EditSvr" Click="EditSvr_Click_1"></MenuItem>
-                        <MenuItem Header="删除" Name="DeleteSvr" Click="DeleteSvr_Click_1"></MenuItem>
-                    </MenuItem>
-                </Menu>
+            <Menu Height="30" Name="menu1" Width="auto" >
+                <MenuItem Header="群组管理">
+                    <MenuItem Header="新建组" Name="AddGroup" Click="AddGroup_Click_1"></MenuItem>
+                    <MenuItem Header="重命名组" Name="RenameGroup" Click="RenameGroup_Click_1"></MenuItem>
+                    <MenuItem Header="删除组" Name="DeleteGroup" Click="DeleteGroup_Click_1"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="计算机管理">
+                    <MenuItem Header="新增" Name="AddSvr" Click="AddSvr_Click_1"></MenuItem>
+                    <MenuItem Header="修改" Name="EditSvr" Click="EditSvr_Click_1"></MenuItem>
+                    <MenuItem Header="删除" Name="DeleteSvr" Click="DeleteSvr_Click_1"></MenuItem>
+                </MenuItem>
+            </Menu>
         </StackPanel>
-    <Grid DockPanel.Dock="Top" >
+        <Grid DockPanel.Dock="Top" >
             <DataGrid Name="dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding model}" Background="Transparent" BorderBrush="Transparent"
                   IsReadOnly="True" SelectionMode="Single" AllowDrop="True" PreviewMouseLeftButtonDown="dataGrid_PreviewMouseLeftButtonDown" MouseMove="dataGrid_MouseMove_1" MouseLeftButtonUp="dataGrid_MouseLeftButtonUp_1" Drop="dataGrid_Drop" 
                   HorizontalGridLinesBrush="BlanchedAlmond" VerticalGridLinesBrush="BlanchedAlmond">
-            <DataGrid.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Expander IsExpanded="True">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Path=Name}" />
-                                                    <TextBlock Text="{Binding Path=ItemCount,StringFormat=(共{0}条)}"/>
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </DataGrid.GroupStyle>
+                <DataGrid.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Path=Name}" />
+                                                        <TextBlock Text="{Binding Path=ItemCount,StringFormat=(共{0}条)}"/>
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="连接计算机" Name="btnConenction" Click="Button_Click"></MenuItem>
@@ -71,12 +81,12 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="SN" Width="80" Binding="{Binding SN}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="UserName" Width="80" Binding="{Binding UserName}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Width="80" Binding="{Binding Status}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Remark" Width="80" Binding="{Binding Remark}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="计算机IP/域名" Width="80" Binding="{Binding SN}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="用户名" Width="80" Binding="{Binding UserName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="状态" Width="80" Binding="{Binding Status}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="备注" Width="80" Binding="{Binding Remark}"></DataGridTextColumn>
                 </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+            </DataGrid>
+        </Grid>
     </DockPanel>
 </Page>

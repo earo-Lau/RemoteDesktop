@@ -232,6 +232,15 @@
     <Resource Include="Contents\Image\Menu.png" />
     <Resource Include="Contents\Image\Min.png" />
     <Resource Include="Contents\Image\Theme.png" />
+    <Resource Include="Contents\Image\bdlogo.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Contents\Image\glogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Contents\Image\tblogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Contents\SvrList.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
